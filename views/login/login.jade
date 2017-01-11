@@ -1,11 +1,15 @@
 extends ../layout
 
 block content
-    div
-        form(action="/users")
-            input(name="username",type="text" value="jhonYu")
-            br
-            input(name="password",type="password" value="123456")
-            br
-            button(name="submit",type="submit" ) 登录
+    .container.bg-photo
+        .tap-login
+            form.form-signin(role='form' method='post' action="/users/add" )
+                h2.form-signin-heading 欢迎登录
+                input.form-control(name='name' type='type', placeholder='Username', required='', autofocus='')
+                input.form-control(name='password' type='password', placeholder='Password', required='')
+                .checkbox
+                    label
+                        input(type='checkbox', value='remember-me')
+                        |  Remember me
+                button.btn.btn-lg.btn-primary.btn-block(type='submit') 登录
 

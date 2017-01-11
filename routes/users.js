@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 /**
  * 新增用户
  */
-router.get('/add',function(req,res,next){
+router.post('/add',function(req,res,next){
   userDao.add(req,res,next);
 });
 

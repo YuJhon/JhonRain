@@ -7,7 +7,7 @@
  * @version v1.0
  */
 var user = {
-    insert:'INSERT INTO t_user(id, name, age) VALUES(0,?,?)',
+    insert:'INSERT INTO t_user(name, password) VALUES(?,?)',
     update:'update t_user set name=?, age=? where id=?',
     delete: 'delete from t_user where id=?',
     queryById: 'select * from t_user where id=?',

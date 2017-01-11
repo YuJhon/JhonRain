@@ -16,7 +16,11 @@ module.exports = {
     add: function (req, res, next) {
         $baseDao.pool().getConnection(function (err, connection) {
             // 获取前台页面传过来的参数
-            var param = req.query || req.params;
+            var params = req.body;
+            if (params.name == null || params.password == null) {
+                $baseDao.jsonWrite(res, undefined);
+                return;
+            }
 
             // 建立连接，向表中插入值
             // 'INSERT INTO user(id, name, age) VALUES(0,?,?)',

@@ -1,5 +1,7 @@
 body {
-    padding: 50px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,25 +9,61 @@ a {
     color: #00B7FF;
 }
 
-.form-row {
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
     margin-bottom: 10px;
 }
 
-.form-row label span {
-    display: inline-block;
-    width: 45px;
+.form-signin .checkbox {
+    font-weight: normal;
 }
 
-.form-row input {
-    width: 120px;
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
 }
 
-.form-row input[type=submit] {
-    width: 50px;
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 ul li {
     float: left;
     list-style: none; /*去掉li前的点标记*/
     margin: 5px; /*外边距*/
+}
+
+.bg-photo{
+    background-image: url("../images/background.jpg");
+    margin-top: 2%;
+}
+
+.tap-login {
+    background-color:#788895;
+    width:330px;
+    float:right;
+    margin: 43% 30px 20px 0px;
 }
