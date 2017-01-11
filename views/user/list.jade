@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    - each item in list
+        ul
+            li= item.name
+            li= item.age
+            a(href='/') 更新
+
