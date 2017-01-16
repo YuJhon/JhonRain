@@ -2,14 +2,12 @@ extends ../layout
 
 block content
     .container.bg-photo
-        .tap-login
-            form.form-signin(role='form' method='post' action="/users/add" )
+        .tap-login(ng-controller="myController")
+            form.form-signin(role='form')
                 h2.form-signin-heading 欢迎登录
-                input.form-control(name='name' type='type', placeholder='Username', required='', autofocus='')
-                input.form-control(name='password' type='password', placeholder='Password', required='')
-                .checkbox
-                    label
-                        input(type='checkbox', value='remember-me')
-                        |  Remember me
-                button.btn.btn-lg.btn-primary.btn-block(type='submit') 登录
-
+                input.form-control(name='name' type='type', placeholder='Username', required='', autofocus='' ng-model="user.name")
+                input.form-control(name='password' type='password', placeholder='Password', required='' ng-model="user.password")
+                button.btn.btn-lg.btn-primary.btn-block(type='submit' ng-click="submit()" ) 登录
+block scripts
+    script(src='/javascripts/ctrl/LoginController.js')
+    script(src='/javascripts/service/LoginService.js')
