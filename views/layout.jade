@@ -9,10 +9,12 @@ html(ng-app="myapp")
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
   body
-    block content
+    div(ng-view)
+      block content
 
-    script(src='/javascripts/jquery-1.11.1.min.js')
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/angular.min.js')
-    script(src='/javascripts/base.js')
-    block scripts
+      script(src='/javascripts/jquery-1.11.1.min.js')
+      script(src='/javascripts/bootstrap.min.js')
+      script(src='/javascripts/angular.min.js')
+      script(src='/javascripts/angular-route.min.js')
+      script(src='/javascripts/base.js')
+      block scripts

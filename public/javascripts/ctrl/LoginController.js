@@ -7,11 +7,22 @@
  * @version v1.0
  */
 
-jhonApp.controller('myController',['$scope','LoginService',function(scope,LoginService){
+jhonApp.controller('LoginController',['$scope','$location','LoginService',function(scope,location,LoginService){
     scope.submit = function(){
         var username = scope.user.name;
         var password = scope.user.password;
-        var result = LoginService.login(username,password);
-        alert(result);
+        LoginService.login(username,password).then(function(result){
+            if (result){
+                console.info("Controller获取数据",result);
+                location.path('/users/');
+                location.search({});
+                scope.user = {};
+            }else{
+                location.path("/login/");
+                location.search({});
+                scope.user = {};
+            }
+        });
+
     }
 }]);

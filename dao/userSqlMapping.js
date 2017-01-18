@@ -11,7 +11,8 @@ var user = {
     update:'update t_user set name=?, age=? where id=?',
     delete: 'delete from t_user where id=?',
     queryById: 'select * from t_user where id=?',
-    queryAll: 'select * from t_user'
+    queryAll: 'select * from t_user',
+    queryByNameAndPassport:'select * from t_user where name=? and password=?'
 };
 
 module.exports = user;

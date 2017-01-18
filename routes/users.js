@@ -1,10 +1,15 @@
 var express = require('express');
-var userDao = require('../dao/userDao');
+var path = require('path');
+var userDao = require(path.resolve(appPath ,'dao/userDao'));
+var $baseDao = require(path.resolve(appPath ,'dao/baseDao'));
 var router = express.Router();
 
 /**查询所有用户 **/
 router.get('/', function(req, res, next) {
-    userDao.queryAll(req,res,next);
+    userDao.queryAll().then(function(result){
+        console.info(result);
+        res.end(JSON.stringify(result));
+    });
 });
 
 /**
@@ -35,5 +40,23 @@ router.get('/delete',function(req,res,next){
 router.post('/update',function(req,res,next){
   userDao.update(req,res,next);
 });
+
+router.post('/queryByNameAndPassport',function(req,res,next){
+    var params = req.body;
+    if (params.name == null || params.password == null) {
+        $baseDao.jsonWrite(res, undefined);
+        return;
+    }
+    var username = params.name;
+    var password = params.password;
+    
+    userDao.queryByNameAndPassportPromise(username,password).then(function(result){
+        console.info(result);
+        res.end(JSON.stringify(result));
+    });
+    
+    
+});
+
 
 module.exports = router;

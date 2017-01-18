@@ -5,20 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// var session = require('express-session');
-//
-// app.use(session({
-//     secret: '12345',
-//     name: 'demo',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-//     cookie: {maxAge: 80000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
-//     resave: false,
-//     saveUninitialized: true,
-// }));
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+var glob = require("glob");
 var app = express();
+/** 设置全局路径 **/
+global.appPath = __dirname;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,8 +29,20 @@ var accessLogStream = fs.createWriteStream(__dirname+ '/log/access.log',{flags: 
 app.use(logger('combined',{stream:accessLogStream}));
 
 
-app.use('/', index);
-app.use('/users', users);
+// 批量装载route
+glob.sync(path.resolve(__dirname , 'routes/*.js')).forEach(function(item){
+  var name = path.parse(item).name;
+  if(name=='index'){
+    name = '';
+  }
+  app.use('/' + name, require(item));
+});
+
+// var index = require('./routes/index');
+// var users = require('./routes/users');
+
+// app.use('/', index);
+// app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

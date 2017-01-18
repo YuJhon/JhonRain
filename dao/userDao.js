@@ -8,6 +8,8 @@
  */
 // dao/userDao.js
 var $baseDao = require('./baseDao');
+
+var Promise = require("Promise").default;
 /** sql的映射文件 **/
 var $sql = require('./userSqlMapping');
 
@@ -87,17 +89,20 @@ module.exports = {
             });
         });
     },
-    queryAll: function (req, res, next) {
-        $baseDao.pool().getConnection(function (err, connection) {
-            connection.query($sql.queryAll, function (err, result) {
-                if (result) {
-                    res.render('user/list', {
-                        list: result
-                    });
-                }
-                connection.release();
+    queryAll: function () {
+        var promise = new Promise(function(resolve) {
+            $baseDao.pool().getConnection(function (err, connection) {
+                connection.query($sql.queryAll, function (err, result) {
+                    if (result) {
+                        resolve(result);
+                    }else {
+                        reject(err);
+                    }
+                    connection.release();
+                });
             });
         });
+        return promise;
     },
     queryById: function (req, res, next) {
         // 为了拼凑正确的sql语句，这里要转下整数
@@ -108,5 +113,25 @@ module.exports = {
                 connection.release();
             });
         });
+    },
+    // queryByNameAndPassport: function(username,password,callback){
+    //     $baseDao.pool().getConnection(function (err, connection) {
+    //          connection.query($sql.queryByNameAndPassport,[username, password],function(err, result){
+    //              callback(result);
+    //             connection.release();
+    //         });
+    //     });
+    // },
+
+    queryByNameAndPassportPromise: function(username,password){
+        var promise = new Promise(function(resolve){
+            $baseDao.pool().getConnection(function (err, connection) {
+                connection.query($sql.queryByNameAndPassport,[username, password],function(err, result){
+                    resolve(result);
+                    connection.release();
+                });
+            });
+        });
+        return promise;
     }
 };

@@ -2,7 +2,7 @@ extends ../layout
 
 block content
     .container.bg-photo
-        .tap-login(ng-controller="myController")
+        .tap-login(ng-controller="LoginController")
             form.form-signin(role='form')
                 h2.form-signin-heading 欢迎登录
                 input.form-control(name='name' type='type', placeholder='Username', required='', autofocus='' ng-model="user.name")

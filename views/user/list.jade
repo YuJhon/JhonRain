@@ -1,9 +1,24 @@
 extends ../layout
 
 block content
-    - each item in list
-        ul
-            li= item.name
-            li= item.age
-            a(href='/') 更新
+    div(ng-controller="UserController")
+        table.table.table-striped(width="100%")
+            caption 测试表头
+            thead
+                tr
+                    th(width="5")
+                    th 姓名
+                    th 年龄
+                    th 密码
+                    th(width="5")
+            tbody
+                tr(ng-repeat=" user in table.list ")
+                    td=""
+                    td=user.name
+                    td=user.age
+                    td=user.password
+                    td=""
 
+block scripts
+    script(src='/javascripts/ctrl/UserController.js')
+    script(src='/javascripts/ctrl/UserService.js')
